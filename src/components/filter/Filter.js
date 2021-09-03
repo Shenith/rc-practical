@@ -1,7 +1,8 @@
 import { Button } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 
 const Filter = (props) => {
+    const[selectedSize, setSelectedSize] = useState('all')
 
     const sizes = [
         {'size': 'xs', 'name': 'xsmall'},
@@ -14,6 +15,11 @@ const Filter = (props) => {
         {'size': 'all', 'name': 'all'},
     ]
 
+    const onClickHandler = (s) => {
+        setSelectedSize(s.size);
+        props.filterHandler(s);
+    }
+
     return(
         <div>
         <div>
@@ -22,9 +28,11 @@ const Filter = (props) => {
         <div>
             {
                 sizes.map(s => {
-                    return(
-                        <Button key={s.size} color="primary" onClick={() =>props.filterHandler(s)}>{s.size}</Button>
-                    )
+                    if(s.size === selectedSize) {
+                        return(<Button key={s.size} variant="contained" color="primary" onClick={() =>onClickHandler(s)}>{s.size}</Button>)
+                    } else {
+                        return(<Button key={s.size} color="primary" onClick={() =>onClickHandler(s)}>{s.size}</Button>)
+                    }
                 })
             }
         </div>
