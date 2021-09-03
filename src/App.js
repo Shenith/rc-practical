@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { getAll } from './actions';
 import { CircularProgress, Container, Grid, Grow } from '@material-ui/core';
 import Filter from './components/filter/Filter';
+import NavBar from './components/navBar/NavBar';
 
 function App() {
   const [filteredData, setFilteredData] = useState(useSelector((store) => store.items.items));
@@ -43,7 +44,7 @@ function App() {
           <Grid item xs={12} sm={9}>
             <Grid container spacing={1}>
               <Grid item xs={12}>
-                <p>navigation bar</p>
+                <NavBar count={filteredData?.length}/>
               </Grid>
               <Grid container item xs={12}>
                 {
