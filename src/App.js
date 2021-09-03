@@ -8,7 +8,7 @@ import ItemCard from './components/itemCard/ItemCard';
 import DrawerCart from './components/drawerCart/DrawerCart';
 
 function App() {
-  const [filteredData, setFilteredData] = useState(useSelector((store) => store.items.items));
+  const [filteredData, setFilteredData] = useState([]);
   const [drawerState, setDrawerState] = useState(false);
 
   const dispatch = useDispatch();
@@ -37,11 +37,14 @@ function App() {
     dispatch(getAll())
   },[dispatch])
 
+  useEffect(() => {
+    setFilteredData(alldata.items);
+  },[alldata])
+
   return (
     !alldata?.items.length ? <CircularProgress /> : (
     <Grow in>
       <Container>
-        {console.log(filteredData)}
         <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
           <Grid item xs={12} sm={3}>
             <Filter filterHandler={filterHandler}/>
