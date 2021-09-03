@@ -1,11 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getAll } from './actions';
 import { CircularProgress, Container, Grid, Grow } from '@material-ui/core';
 import Filter from './components/filter/Filter';
 import NavBar from './components/navBar/NavBar';
+import ItemCard from './components/itemCard/ItemCard';
 
 function App() {
   const [filteredData, setFilteredData] = useState(useSelector((store) => store.items.items));
@@ -30,7 +29,7 @@ function App() {
 
   useEffect(() =>{
     dispatch(getAll())
-  },[])
+  },[dispatch])
 
   return (
     !alldata?.items.length ? <CircularProgress /> : (
@@ -50,7 +49,7 @@ function App() {
                 {
                   filteredData?.map((item) => {
                     return(
-                    <p>{item.name}</p>
+                    <ItemCard key={item.id} item={item} />
                     )
                   })
                 }
