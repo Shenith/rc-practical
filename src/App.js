@@ -43,7 +43,7 @@ function App() {
           <Grid item xs={12} sm={9}>
             <Grid container spacing={1}>
               <Grid item xs={12}>
-                <NavBar count={filteredData?.length}/>
+                <NavBar count={filteredData?.length} cart={alldata.cart}/>
               </Grid>
               <Grid container item xs={12}>
                 {

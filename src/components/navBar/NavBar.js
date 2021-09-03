@@ -37,7 +37,7 @@ const NavBar = (props) => {
                 <p>{`${props.count} product(s) found`}</p>
                 <StyledCartDiv>
                 <ShoppingCartIcon color="inherit" />
-                <StyledP>0</StyledP>
+                <StyledP>{props.cart.length}</StyledP>
                 </StyledCartDiv>
             </Grid>
         </StyledDiv>

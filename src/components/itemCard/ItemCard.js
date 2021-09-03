@@ -36,7 +36,7 @@ function ItemCard (props) {
 
   const onClickHandler = (item) => {
     console.log(item)
-    // dispatch(addToCart(item))
+    dispatch(addToCart(item))
   }
 
   const { item } = props

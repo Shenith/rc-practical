@@ -8,3 +8,11 @@ export const getAll = () => async (dispatch) => {
         console.log(error.message);
     }
 }
+
+export const addToCart = (item) => async (dispatch) => {
+    try {
+        dispatch({ type: 'ADD_TO_CART', payload: item });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
