@@ -35,7 +35,7 @@ const NavBar = (props) => {
             alignItems="center"
             >
                 <p>{`${props.count} product(s) found`}</p>
-                <StyledCartDiv>
+                <StyledCartDiv onClick={props.togleDrawer}>
                 <ShoppingCartIcon color="inherit" />
                 <StyledP>{props.cart.length}</StyledP>
                 </StyledCartDiv>

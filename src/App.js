@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getAll } from './actions';
-import { CircularProgress, Container, Grid, Grow } from '@material-ui/core';
+import { CircularProgress, Container, Drawer, Grid, Grow } from '@material-ui/core';
 import Filter from './components/filter/Filter';
 import NavBar from './components/navBar/NavBar';
 import ItemCard from './components/itemCard/ItemCard';
 
 function App() {
   const [filteredData, setFilteredData] = useState(useSelector((store) => store.items.items));
+  const [drawerState, setDrawerState] = useState(false);
 
   const dispatch = useDispatch();
 
-  const alldata = useSelector((store) => store.items)
+  const alldata = useSelector((store) => store.items);
 
   const filterHandler = (s) => {
     console.log(s);
@@ -25,6 +26,10 @@ function App() {
         })
       )
     }
+  }
+
+  const togleDrawer = (state) => {
+    setDrawerState(state);
   }
 
   useEffect(() =>{
@@ -43,7 +48,10 @@ function App() {
           <Grid item xs={12} sm={9}>
             <Grid container spacing={1}>
               <Grid item xs={12}>
-                <NavBar count={filteredData?.length} cart={alldata.cart}/>
+                <NavBar togleDrawer={() => togleDrawer(true)} count={filteredData?.length} cart={alldata.cart}/>
+                <Drawer anchor={'right'} open={drawerState} onClose={() => togleDrawer(false)}>
+                  <p>shenith</p>
+                </Drawer>
               </Grid>
               <Grid container item xs={12}>
                 {
