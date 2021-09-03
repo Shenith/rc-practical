@@ -1,15 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getAll } from './actions';
 import { CircularProgress, Container, Grid, Grow } from '@material-ui/core';
+import Filter from './components/filter/Filter';
 
 function App() {
+  const [filteredData, setFilteredData] = useState(useSelector((store) => store.items.items));
 
   const dispatch = useDispatch();
 
   const alldata = useSelector((store) => store.items)
+
+  const filterHandler = (s) => {
+    console.log(s);
+    if(s.name==='all') {
+      setFilteredData(alldata.items);
+    }
+    else{
+      setFilteredData(
+        alldata.items.filter((item) => {
+          if(s.name === item.details.size) return item;
+        })
+      )
+    }
+  }
 
   useEffect(() =>{
     dispatch(getAll())
@@ -19,9 +35,10 @@ function App() {
     !alldata?.items.length ? <CircularProgress /> : (
     <Grow in>
       <Container>
+        {console.log(filteredData)}
         <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
           <Grid item xs={12} sm={3}>
-            <p>filter section</p>
+            <Filter filterHandler={filterHandler}/>
           </Grid>
           <Grid item xs={12} sm={9}>
             <Grid container spacing={1}>
@@ -29,8 +46,13 @@ function App() {
                 <p>navigation bar</p>
               </Grid>
               <Grid container item xs={12}>
-                <p>main content</p>
-                {console.log(alldata)}
+                {
+                  filteredData?.map((item) => {
+                    return(
+                    <p>{item.name}</p>
+                    )
+                  })
+                }
               </Grid>
             </Grid>
           </Grid>
