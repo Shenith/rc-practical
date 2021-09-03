@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import BagCard from "./BagCard";
 
 const StyledDiv = styled.div`
   padding: 10px,
@@ -19,16 +20,17 @@ const StyledP = styled.p`
     width: 20px;
     height: 20px;
     border-radius: 10px;
-    margin-top: -10px;
-    margin-left: 5px;
 `;
 
 const IconContainer = styled.div`
-    margin-left: 185px;
+    margin-left: 165px;
+    display: flex;
+    flex-direction: row;
 `;
 
 const DrawerCart = (props) => {
-    const [cartData, setCartData] = useState([])
+    const [cartData, setCartData] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0)
 
     useEffect(()=>{
         const counts = groupBy(props.data.cart, 'id')
@@ -48,20 +50,19 @@ const DrawerCart = (props) => {
 
     return(
         <StyledDiv>
-            <IconContainer>
-            <ShoppingCartIcon color="inherit" />
-            <StyledP>{props.data.cart.length}</StyledP>
-            </IconContainer>
-
+            <div>
+                <IconContainer>
+                    <ShoppingCartIcon color="inherit" />
+                    <StyledP>{props.data.cart.length}</StyledP>
+                    <h2 style={{marginTop: 'auto'}}>Bag</h2>
+                </IconContainer>
+            </div>
             <div>
             {
                 Object.values(cartData).map((i) => {
                     console.log(i[0], 'objjj')
                     return(
-                        <div>
-                            <p>{i.length}</p>
-                            <p>{i[0].name}</p>
-                        </div>
+                        <BagCard key={i[0].id} item={i}/>
                     )
                 })
             }
