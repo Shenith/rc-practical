@@ -20,7 +20,7 @@ const BagCard = ({item}) => {
                 <p>{`Quantity: ${item.length}`}</p>
             </Grid>
             <Grid item xs={2}>
-                <p style={{color: 'orange'}}>{`$ ${item[0].details.price}`}</p>
+                <p style={{color: 'orange'}}>{`$ ${(item[0].details.price)*item.length}`}</p>
             </Grid>
         </Grid>
     )

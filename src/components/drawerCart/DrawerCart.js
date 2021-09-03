@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import BagCard from "./BagCard";
+import { Grid } from "@material-ui/core";
 
 const StyledDiv = styled.div`
   padding: 10px,
@@ -34,9 +35,16 @@ const DrawerCart = (props) => {
 
     useEffect(()=>{
         const counts = groupBy(props.data.cart, 'id')
-        console.log(counts, 'counts');
+        console.log(props.data.cart, 'counts');
+        getPrice();
         setCartData(counts);
     },[])
+
+    const getPrice = () => {
+        props.data.cart.map((item) => {
+            setTotalPrice(totalPrice => totalPrice + (item.details.price))
+        })
+    }
 
     const groupBy = (array, key) => {
         return array.reduce((result, currentValue) => {
@@ -60,13 +68,20 @@ const DrawerCart = (props) => {
             <div>
             {
                 Object.values(cartData).map((i) => {
-                    console.log(i[0], 'objjj')
                     return(
                         <BagCard key={i[0].id} item={i}/>
                     )
                 })
             }
             </div>
+            <Grid container spacing={2}>
+            <Grid item xs={10}>
+                <h4>Subtotal</h4>
+            </Grid>
+            <Grid item xs={2}>
+                <h5>{`$ ${totalPrice}`}</h5>
+            </Grid>
+            </Grid>
             
         </StyledDiv>
     )
