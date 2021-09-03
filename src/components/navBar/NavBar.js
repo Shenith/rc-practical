@@ -11,14 +11,13 @@ const StyledDiv = styled.div`
 const StyledCartDiv = styled.div`
     text-align: center;
     width: 100px
-    background-color: green
 `;
 
 const StyledP = styled.p`
     margin-left: 25px;
     margin-top: -20px;
-    color: yellow;
-    background-color: red;
+    color: black;
+    background-color: yellow;
     width: 20px;
     height: 20px;
     border-radius: 10px;

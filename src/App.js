@@ -5,6 +5,7 @@ import { CircularProgress, Container, Drawer, Grid, Grow } from '@material-ui/co
 import Filter from './components/filter/Filter';
 import NavBar from './components/navBar/NavBar';
 import ItemCard from './components/itemCard/ItemCard';
+import DrawerCart from './components/drawerCart/DrawerCart';
 
 function App() {
   const [filteredData, setFilteredData] = useState(useSelector((store) => store.items.items));
@@ -50,7 +51,7 @@ function App() {
               <Grid item xs={12}>
                 <NavBar togleDrawer={() => togleDrawer(true)} count={filteredData?.length} cart={alldata.cart}/>
                 <Drawer anchor={'right'} open={drawerState} onClose={() => togleDrawer(false)}>
-                  <p>shenith</p>
+                  <DrawerCart data={alldata}/>
                 </Drawer>
               </Grid>
               <Grid container item xs={12}>
